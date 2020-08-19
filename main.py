@@ -27,20 +27,28 @@ def game():
         result_jav1st2 = throw()
         score_player = result_player1 + result_player2
         score_jav1st = result_jav1st1 + result_jav1st2
+        double_player = ' '
+        double_jav1st = ' '
+
 
         if result_jav1st1 == result_jav1st2:
-            print("Компьютер выкинул дубль! Сумма выиграша умножена вдвое - ", score_jav1st * 2)
+            score_jav1st = score_jav1st * 2
+            double_jav1st = True
+            double_jav1st = f'\nКомпьютер выкинул дубль! Сумма выиграша умножена вдвое -  {score_jav1st}'
         elif result_player1 == result_player2:
-            print("Поздравляю, у Вас дубль! Сумма выиграша умножена вдвое - ", score_player * 2)
+            score_player = score_player * 2
+            double_player = True
+            double_player = f'\nПоздравляю, у Вас дубль! Сумма выиграша умножена вдвое - {score_player}'
 
         answ = int(answ)
+        print(f'Ваша ставка {answ} монет')
         if answ <= int(balance.read_balance()):
-            print(f'Вы выкинули', result_player1, "и", result_player2)
-            print(f'Компьютер кинул', result_jav1st1, "и", result_jav1st2)
+            print(f'Вы выкинули', result_player1, 'и', result_player2, double_player)
+            print(f'Компьютер кинул', result_jav1st1, 'и', result_jav1st2, double_jav1st)
             if score_player > score_jav1st:
                 print('Вы выиграли!')
                 money = answ + balance.read_balance()
-                print(f'Ваш баланс', money, 'монет')
+                print(f'Вам зачислоно {answ} монет.\nВаш баланс {money} монет')
                 balance.write_balance(money)
                 balance.read_balance()
             elif score_jav1st == score_player:
@@ -48,7 +56,7 @@ def game():
             else:
                 print("Вы проиграли.")
                 money = balance.read_balance() - answ
-                print(f'Ваш баланс', money, 'монет')
+                print(f'Списано {answ} монет.\nВаш баланс {money} монет')
                 balance.write_balance(money)
         else:
             print('Неизвестная команда ')
@@ -56,7 +64,9 @@ def game():
 
 
 def start():
-    answ = input("1)Продолжить игру\n2)Новая игра\n3)Выход\n")
+    answ = input('''Приветствую! Это игра в кости. Правила просты- побеждает тот, у кого выпало наибольшее число.
+Бросок двух производится поочерёдно, одинаковое значение умножается вдвое.
+ 1)Продолжить игру\n 2)Новая игра\n 3)Выход\n''')
     if answ == '2':
         balance.zero()
         game()
