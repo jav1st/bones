@@ -1,5 +1,5 @@
 import random
-from player import Player
+import balance
 
 '''
 1) Приветствие игрока
@@ -13,24 +13,6 @@ from player import Player
 def throw():
     numbers = (1, 2, 3, 4, 5, 7)
     return random.choice(numbers)
-
-def start():
-    name = input(str('''Приветствую!
-Как я могу к Вам обращаться?\n'''))
-    pla = Player(name)
-    answ = input(f'''Итак, {name}! Это игра в кости. Правила просты- побеждает тот, у кого выпало наибольшее число.
-Бросок двух производится поочерёдно, одинаковое значение умножается вдвое.
- 1)Продолжить игру\n 2)Новая игра\n 3)Выход\n''')
-    if answ == '2':
-        pla.zero()
-        game()
-    elif answ == '3':
-        exit()
-    elif answ == '1':
-        game()
-    elif answ == '4':
-        pla.player_write()
-        print(pla.player_read())
 
 
 def game():
@@ -48,14 +30,15 @@ def game():
         double_player = ' '
         double_jav1st = ' '
 
+
         if result_jav1st1 == result_jav1st2:
             score_jav1st = score_jav1st * 2
             double_jav1st = True
-            double_jav1st = f'\nКомпьютер выкинул дубль! Сумма выиграша умножена вдвое -  {score_jav1st}'
+            double_jav1st = (f'\nКомпьютер выкинул дубль! Сумма выиграша умножена вдвое -  {score_jav1st}')
         elif result_player1 == result_player2:
             score_player = score_player * 2
             double_player = True
-            double_player = f'\nПоздравляю, у Вас дубль! Сумма выиграша умножена вдвое - {score_player}'
+            double_player = (f'\nПоздравляю, у Вас дубль! Сумма выиграша умножена вдвое - {score_player}')
 
         answ = int(answ)
         print(f'Ваша ставка {answ} монет')
@@ -80,6 +63,17 @@ def game():
             break
 
 
+def start():
+    answ = input('''Приветствую! Это игра в кости. Правила просты- побеждает тот, у кого выпало наибольшее число.
+Бросок двух производится поочерёдно, одинаковое значение умножается вдвое.
+ 1)Продолжить игру\n 2)Новая игра\n 3)Выход\n''')
+    if answ == '2':
+        balance.zero()
+        game()
+    elif answ == '3':
+        exit()
+    elif answ == '1':
+        game()
 
 
 start()
