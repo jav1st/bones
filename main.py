@@ -1,5 +1,5 @@
 import random
-import balance
+from player import Player
 
 '''
 1) Приветствие игрока
@@ -13,6 +13,24 @@ import balance
 def throw():
     numbers = (1, 2, 3, 4, 5, 7)
     return random.choice(numbers)
+
+def start():
+    name = input(str('''Приветствую!
+Как я могу к Вам обращаться?\n'''))
+    pla = Player(name)
+    answ = input(f'''Итак, {name}! Это игра в кости. Правила просты- побеждает тот, у кого выпало наибольшее число.
+Бросок двух производится поочерёдно, одинаковое значение умножается вдвое.
+ 1)Продолжить игру\n 2)Новая игра\n 3)Выход\n''')
+    if answ == '2':
+        pla.zero()
+        game()
+    elif answ == '3':
+        exit()
+    elif answ == '1':
+        game()
+    elif answ == '4':
+        pla.player_write()
+        print(pla.player_read())
 
 
 def game():
@@ -29,7 +47,6 @@ def game():
         score_jav1st = result_jav1st1 + result_jav1st2
         double_player = ' '
         double_jav1st = ' '
-
 
         if result_jav1st1 == result_jav1st2:
             score_jav1st = score_jav1st * 2
@@ -63,17 +80,6 @@ def game():
             break
 
 
-def start():
-    answ = input('''Приветствую! Это игра в кости. Правила просты- побеждает тот, у кого выпало наибольшее число.
-Бросок двух производится поочерёдно, одинаковое значение умножается вдвое.
- 1)Продолжить игру\n 2)Новая игра\n 3)Выход\n''')
-    if answ == '2':
-        balance.zero()
-        game()
-    elif answ == '3':
-        exit()
-    elif answ == '1':
-        game()
 
 
 start()
