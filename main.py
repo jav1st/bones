@@ -17,8 +17,11 @@ def throw():
 
 def game():
     while True:
-        answ = input('\n -Ваша ставка?\n -Что бы выйти введите "Exit"\n').lower()
+        answ = input('\n -Ваша ставка?\n -Что бы выйти введите "Exit"\n -Узнать баланс- введите "Balance"\n').lower()
         if answ == 'exit':
+            break
+        if answ == 'balance':
+            print(balance.read_balance())
             break
 
         result_player1 = throw()
@@ -58,6 +61,17 @@ def game():
                 money = balance.read_balance() - answ
                 print(f'Списано {answ} монет.\nВаш баланс {money} монет')
                 balance.write_balance(money)
+        if int(balance.read_balance()) == 0:
+            answ = ('Вы проиграли все деньги! Начать новую игру?.\n Да\Нет').lower()
+            if answ == 'да':
+                balance.zero()
+                game()
+            if answ == 'нет':
+                break
+        if answ >= int(balance.read_balance()):
+            print(f'Ваш баланс {balance.read_balance()}'
+                  f'\nУменьшите ставку')
+            continue
         else:
             print('Неизвестная команда ')
             break

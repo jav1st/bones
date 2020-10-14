@@ -11,7 +11,7 @@ def read_balance():
 
 def write_balance(money):
     f = open('money.txt', 'w')
-    f.write(str(money))
+    f.write(money)
 def zero():
     f = open('money.txt', 'w')
     f.write(str(start_money))
