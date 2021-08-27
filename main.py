@@ -18,7 +18,8 @@ def game():
     while True:
         answ = input('\n -Ваша ставка?\n -Что бы выйти введите "Exit"\n -Узнать баланс- введите "Balance"\n').lower()
         if answ == 'exit':
-            break
+            print('До новых встреч!')
+            exit(0)
         if answ == 'balance':
             print(balance.read_balance())
             continue
