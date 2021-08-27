@@ -99,7 +99,7 @@ def zero_balance():
         game()
     if answ == 'нет':
         print('До скорых встреч!')
-        exit()
+        exit(0)
 
 
 start()
