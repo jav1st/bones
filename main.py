@@ -9,7 +9,6 @@ import balance
 '''
 
 
-
 def throw():
     numbers = (1, 2, 3, 4, 5, 7)
     return random.choice(numbers)
@@ -24,7 +23,6 @@ def game():
             print(balance.read_balance())
             continue
 
-
         result_player1 = throw()
         result_jav1st1 = throw()
         result_player2 = throw()
@@ -33,7 +31,6 @@ def game():
         score_jav1st = result_jav1st1 + result_jav1st2
         double_player = ' '
         double_jav1st = ' '
-
 
         if result_jav1st1 == result_jav1st2:
             score_jav1st = score_jav1st * 2
@@ -68,15 +65,9 @@ def game():
                 money = balance.read_balance() - answ
                 print(f'Списано {answ} монет.\nВаш баланс {money} монет')
                 balance.write_balance(money)
+                if money == 0:
+                    zero_balance()
                 continue
-
-        if str(balance.read_balance()) == 0:
-            answ = ('Вы проиграли все деньги! Начать новую игру?.\n Да\Нет').lower()
-            if answ == 'да':
-                balance.zero()
-                game()
-            if answ == 'нет':
-                break
 
         if answ >= int(balance.read_balance()):
             print(f'Ваш баланс {balance.read_balance()}'
@@ -86,7 +77,6 @@ def game():
         else:
             print('Неизвестная команда ')
             break
-
 
 
 def start():
@@ -100,6 +90,16 @@ def start():
         exit()
     elif answ == '1':
         game()
+
+
+def zero_balance():
+    answ = input('Вы проиграли все деньги! Начать новую игру?.\n Да\Нет\n').lower()
+    if answ == 'да':
+        balance.zero()
+        game()
+    if answ == 'нет':
+        print('До скорых встреч!')
+        exit()
 
 
 start()
